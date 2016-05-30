@@ -44,7 +44,7 @@
 #include "compiler_abstraction.h"
 #include "nordic_common.h"
 #ifdef DEBUG
-#include "bsp.h"
+//#include "bsp.h"
 
 /* global error variables - in order to prevent removal by optimizers */
 uint32_t m_error_code;
@@ -76,7 +76,7 @@ __WEAK void app_error_handler(uint32_t error_code, uint32_t line_num, const uint
 #ifdef BSP_DEFINES_ONLY 
     LEDS_ON(LEDS_MASK);
 #else
-    UNUSED_VARIABLE(bsp_indication_set(BSP_INDICATE_FATAL_ERROR));
+//    UNUSED_VARIABLE(bsp_indication_set(BSP_INDICATE_FATAL_ERROR));
     // This call can be used for debug purposes during application development.
     // @note CAUTION: Activating this code will write the stack to flash on an error.
     //                This function should NOT be used in a final product.
