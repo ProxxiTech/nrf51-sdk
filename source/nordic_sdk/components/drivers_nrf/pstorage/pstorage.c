@@ -1304,6 +1304,10 @@ static void cmd_process(void)
 
 uint32_t pstorage_init(void)
 {
+    if (m_flags & MASK_MODULE_INITIALIZED) {
+        return NRF_SUCCESS;
+    }
+
     cmd_queue_init();
 
     m_next_app_instance = 0;
