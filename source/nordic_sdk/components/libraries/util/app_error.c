@@ -40,6 +40,7 @@
  */
 
 #include "nrf.h"
+#include "nrf_soc.h"
 #include "app_error.h"
 #include "compiler_abstraction.h"
 #include "nordic_common.h"
@@ -68,6 +69,10 @@ const uint8_t * m_p_file_name;
 /*lint -save -e14 */
 __WEAK void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
+    // Set info that reboot occurred due to soft error
+    sd_power_gpregret_clr(0xFFFFFFFF);
+    sd_power_gpregret_set(0xFADE0001/*GP_REG_RET_APP_ERROR_CAUSE_REBOOT*/);
+
     // On assert, the system can only recover with a reset.
 #ifndef DEBUG
     NVIC_SystemReset();
